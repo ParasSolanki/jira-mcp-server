@@ -1,29 +1,40 @@
 {
   "name": "jira-mcp-server",
   "version": "0.0.1",
-  "author": "Paras Solanki",
+  "description": "A model context protocol server for Jira API.",
+  "license": "MIT",
+  "type": "module",
+  "homepage": "https://github.com/ParasSolanki/jira-mcp-server#readme",
+  "author": {
+    "name": "Paras Solanki",
+    "url": "https://parassolanki.com"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/ParasSolanki/jira-mcp-server.git"
   },
-  "license": "MIT",
-  "description": "A model context protocol server for Jira API.",
-  "type": "module",
-  "keywords": [
-    "jira",
-    "mcp",
-    "server",
-    "mcp",
-    "api",
-    "model context protocol"
-  ],
-  "packageManager": "pnpm@9.15.3",
+  "bugs": {
+    "url": "https://github.com/ParasSolanki/jira-mcp-server/issues"
+  },
   "bin": {
     "jira-mcp-server": "dist/app.js"
   },
-  "files": [
-    "dist"
+  "keywords": [
+    "jira",
+    "mcp",
+    "llm",
+    "ai",
+    "server",
+    "model context protocol",
+    "jira api"
   ],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "main": "dist/app.js",
+  "packageManager": "pnpm@9.15.3",
   "scripts": {
     "dev": "dotenvx run -- tsx watch src/app.ts",
     "build": "dotenvx run -f .env.production -- rolldown -c rolldown.config.ts",
