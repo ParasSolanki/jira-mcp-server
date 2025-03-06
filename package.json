@@ -1,36 +1,48 @@
 {
-  "name": "jira-mcp-server",
+  "name": "@parassolanki/jira-mcp-server",
   "version": "0.0.1",
-  "author": "Paras Solanki",
+  "description": "A model context protocol server for Jira API.",
+  "license": "MIT",
+  "type": "module",
+  "homepage": "https://github.com/ParasSolanki/jira-mcp-server#readme",
+  "author": "Paras Solanki <parassolanki151@gmail.com> (https://github.com/ParasSolanki)",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ParasSolanki/jira-mcp-server.git"
+    "url": "git+https://github.com/ParasSolanki/jira-mcp-server.git"
   },
-  "license": "MIT",
-  "description": "A model context protocol server for Jira API.",
-  "type": "module",
-  "keywords": [
-    "jira",
-    "mcp",
-    "server",
-    "mcp",
-    "api",
-    "model context protocol"
-  ],
-  "packageManager": "pnpm@9.15.3",
+  "bugs": {
+    "url": "https://github.com/ParasSolanki/jira-mcp-server/issues"
+  },
   "bin": {
     "jira-mcp-server": "dist/app.js"
   },
-  "files": [
-    "dist"
+  "keywords": [
+    "jira",
+    "mcp",
+    "llm",
+    "ai",
+    "server",
+    "model context protocol",
+    "jira api"
   ],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "main": "dist/app.js",
+  "packageManager": "pnpm@9.15.3",
   "scripts": {
     "dev": "dotenvx run -- tsx watch src/app.ts",
-    "build": "dotenvx run -f .env.production -- rolldown -c rolldown.config.ts",
-    "inspector": "pnpm build && npx @modelcontextprotocol/inspector dist/app.js",
+    "build": "rolldown -c rolldown.config.ts",
+    "build:local": "dotenvx run -f .env.production -- pnpm build",
+    "inspector:local": "pnpm build:local && npx @modelcontextprotocol/inspector dist/app.js",
     "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
     "format": "prettier '**/*.{cjs,mjs,ts,tsx,md,json}' --ignore-path ./.gitignore --ignore-unknown --write",
-    "format:check": "prettier '**/*.{cjs,mjs,ts,tsx,md,json}' --ignore-path ./.gitignore --ignore-unknown --check"
+    "format:check": "prettier '**/*.{cjs,mjs,ts,tsx,md,json}' --ignore-path ./.gitignore --ignore-unknown --check",
+    "release": "changeset version",
+    "pub:release": "pnpm build && changeset publish"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.6.1",
@@ -41,6 +53,7 @@
     "zod-to-json-schema": "^3.24.3"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.28.1",
     "@dotenvx/dotenvx": "^1.38.3",
     "@eslint/js": "^9.21.0",
     "@types/node": "^22.13.8",
