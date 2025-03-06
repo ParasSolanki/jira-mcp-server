@@ -24,7 +24,7 @@ Provides integration with Jira through MCP, allowing LLMs to interact with it.
       "command": "npx",
       "args": ["-y", "jira-mcp-server"],
       "env": {
-        "JIRA_PERSONAL_ACCESS_TOKEN": "your_personal_jira_access_token",
+        "JIRA_PERSONAL_ACCESS_TOKEN": "email@example.com:your_personal_jira_access_token",
         "JIRA_BASE_URL": "jira_base_url"
       }
     }
@@ -89,8 +89,8 @@ pnpm install
 2. Configure Github Access token in `.env`:
 
 ```shell
-JIRA_PERSONAL_ACCESS_TOKEN=<your_personal_jira_access_token>
-JIRA_BASE_URL=<jira_base_url>
+JIRA_PERSONAL_ACCESS_TOKEN=email@example.com:your_personal_jira_access_token
+JIRA_BASE_URL=jira_base_url
 ```
 
 3. Run locally with watch:
