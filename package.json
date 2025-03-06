@@ -34,9 +34,11 @@
   "packageManager": "pnpm@9.15.3",
   "scripts": {
     "dev": "dotenvx run -- tsx watch src/app.ts",
-    "build": "dotenvx run -f .env.production -- rolldown -c rolldown.config.ts",
-    "inspector": "pnpm build && npx @modelcontextprotocol/inspector dist/app.js",
+    "build": "rolldown -c rolldown.config.ts",
+    "build:local": "dotenvx run -f .env.production -- pnpm build",
+    "inspector:local": "pnpm build:local && npx @modelcontextprotocol/inspector dist/app.js",
     "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
     "format": "prettier '**/*.{cjs,mjs,ts,tsx,md,json}' --ignore-path ./.gitignore --ignore-unknown --write",
     "format:check": "prettier '**/*.{cjs,mjs,ts,tsx,md,json}' --ignore-path ./.gitignore --ignore-unknown --check",
     "release": "changeset version",

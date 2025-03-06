@@ -1,0 +1,101 @@
+name: Release
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+  push:
+    branches:
+      - main
+
+# cancel previous runs if a new one is triggered
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    name: Release Package to npm
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        name: Install Node.js
+        with:
+          node-version: 22
+          cache: "pnpm"
+
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        run: |
+          echo "pnpm_cache_dir=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v4
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Check for lint errors 
+        run: pnpm lint
+
+      - name: Run release
+        run: pnpm release
+
+      - name: Run build
+        run: pnpm build
+
+      # - name: Get version from package.json
+      #   id: version
+      #   run: echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+
+      # - name: Create Git tag
+      #   if: ${{ !contains(github.event.head_commit.message, 'chore(release)') && github.event_name != 'workflow_dispatch' }}
+      #   run: |
+      #     git config --local user.email "parassolanki151@gmail.com"
+      #     git config --local user.name "Paras Solanki"
+      #     git tag -a "v${{ steps.version.outputs.version }}" -m "Release v${{ steps.version.outputs.version }}"
+      #     git push origin "v${{ steps.version.outputs.version }}"
+
+      # - name: Create GitHub Release
+      #   if: ${{ !contains(github.event.head_commit.message, 'chore(release)') && github.event_name != 'workflow_dispatch' }}
+      #   uses: softprops/action-gh-release@v1
+      #   with:
+      #     tag_name: v${{ steps.version.outputs.version }}
+      #     name: Release v${{ steps.version.outputs.version }}
+      #     generate_release_notes: true
+
+      - name: Create Version PR or Publish to NPM
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          commit: "chore(release): version packages"
+          title: "chore(release): version packages"
+          version: node .github/changeset-version.js
+          publish: npx changeset publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_ENV: "production"
+
+
