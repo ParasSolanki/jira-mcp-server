@@ -1,14 +1,11 @@
 {
-  "name": "jira-mcp-server",
+  "name": "@parassolanki/jira-mcp-server",
   "version": "0.0.1",
   "description": "A model context protocol server for Jira API.",
   "license": "MIT",
   "type": "module",
   "homepage": "https://github.com/ParasSolanki/jira-mcp-server#readme",
-  "author": {
-    "name": "Paras Solanki",
-    "url": "https://parassolanki.com"
-  },
+  "author": "Paras Solanki <parassolanki151@gmail.com> (https://github.com/ParasSolanki)",
   "repository": {
     "type": "git",
     "url": "https://github.com/ParasSolanki/jira-mcp-server.git"
@@ -41,7 +38,9 @@
     "inspector": "pnpm build && npx @modelcontextprotocol/inspector dist/app.js",
     "lint": "eslint .",
     "format": "prettier '**/*.{cjs,mjs,ts,tsx,md,json}' --ignore-path ./.gitignore --ignore-unknown --write",
-    "format:check": "prettier '**/*.{cjs,mjs,ts,tsx,md,json}' --ignore-path ./.gitignore --ignore-unknown --check"
+    "format:check": "prettier '**/*.{cjs,mjs,ts,tsx,md,json}' --ignore-path ./.gitignore --ignore-unknown --check",
+    "release": "changeset version",
+    "pub:release": "pnpm build && changeset publish"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.6.1",
@@ -52,6 +51,7 @@
     "zod-to-json-schema": "^3.24.3"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.28.1",
     "@dotenvx/dotenvx": "^1.38.3",
     "@eslint/js": "^9.21.0",
     "@types/node": "^22.13.8",
