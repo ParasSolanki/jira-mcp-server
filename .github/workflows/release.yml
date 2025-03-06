@@ -64,7 +64,7 @@ jobs:
             //registry.npmjs.org/:_authToken=$NPM_TOKEN
           EOF
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
 
       - name: Run release
         run: pnpm release
@@ -102,7 +102,7 @@ jobs:
           publish: npx changeset publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
           NODE_ENV: "production"
 
 
