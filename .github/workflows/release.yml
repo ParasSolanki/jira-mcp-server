@@ -15,7 +15,6 @@ concurrency:
 
 jobs:
   release:
-    environment: Production
     runs-on: ubuntu-latest
     name: Release Package to npm
     steps:
