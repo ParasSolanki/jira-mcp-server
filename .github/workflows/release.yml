@@ -81,6 +81,7 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
+          setupGitUser: true
           commit: "chore(release): version packages"
           title: "chore(release): version packages"
           version: pnpm changeset version
