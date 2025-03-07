@@ -13,13 +13,6 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
   cancel-in-progress: true
 
-permissions:
-  issues: write
-  repository-projects: read
-  contents: write
-  pull-requests: write
-  pages: write
-  id-token: write
 
 jobs:
   release:
