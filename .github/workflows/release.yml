@@ -12,9 +12,59 @@ concurrency:
 
 
 jobs:
+  create_pr:
+    runs-on: ubuntu-latest
+    name: Create PR
+    outputs:
+      hasChangesets: ${{ steps.changesets.outputs.hasChangesets }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        name: Install Node.js
+        with:
+          node-version: 22
+
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        run: |
+          echo "pnpm_cache_dir=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v4
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Create Version PR
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          setupGitUser: true
+          commit: "chore(release): version packages"
+          title: "chore(release): version packages"
+          version: node .github/changeset-version.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
   release:
     runs-on: ubuntu-latest
     name: Release Package to npm
+    if: needs.create_pr.outputs.hasChangesets == 'false'
     steps:
       - uses: actions/checkout@v4
         with:
@@ -66,15 +116,13 @@ jobs:
 
       - name: Run build
         run: pnpm build
+        env:
+          NODE_ENV: "production"
 
-      - name: Create Version PR or Publish to NPM
+      - name: Publish to NPM
         id: changesets
         uses: changesets/action@v1
         with:
-          setupGitUser: true
-          commit: "chore(release): version packages"
-          title: "chore(release): version packages"
-          version: pnpm changeset version
           publish: pnpm changeset publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
