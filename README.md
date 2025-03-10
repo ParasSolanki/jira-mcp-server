@@ -22,7 +22,7 @@ Provides integration with Jira through MCP, allowing LLMs to interact with it.
   "mcpServers": {
     "jira": {
       "command": "npx",
-      "args": ["-y", "jira-mcp-server"],
+      "args": ["-y", "@parassolanki/jira-mcp-server"],
       "env": {
         "JIRA_PERSONAL_ACCESS_TOKEN": "email@example.com:your_personal_jira_access_token",
         "JIRA_BASE_URL": "jira_base_url"
