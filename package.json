@@ -1,6 +1,6 @@
 {
   "name": "@parassolanki/jira-mcp-server",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A model context protocol server for Jira API.",
   "license": "MIT",
   "type": "module",
@@ -53,8 +53,8 @@
     "zod-to-json-schema": "^3.24.3"
   },
   "devDependencies": {
-    "@changesets/changelog-github": "^0.5.1",
-    "@changesets/cli": "^2.28.1",
+    "@changesets/changelog-github": "^0.5.0",
+    "@changesets/cli": "^2.27.7",
     "@dotenvx/dotenvx": "^1.38.3",
     "@eslint/js": "^9.21.0",
     "@types/node": "^22.13.8",
