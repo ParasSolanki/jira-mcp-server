@@ -62,6 +62,7 @@ jobs:
 
 
   release:
+    needs: create_pr
     runs-on: ubuntu-latest
     name: Release Package to npm
     if: needs.create_pr.outputs.hasChangesets == 'false'
