@@ -36,6 +36,23 @@ Provides integration with Jira through MCP, allowing LLMs to interact with it.
 }
 ```
 
+For Windows:
+
+```json
+{
+  "mcpServers": {
+    "jira": {
+      "command": "cmd /c npx",
+      "args": ["-y", "@parassolanki/jira-mcp-server@latest"],
+      "env": {
+        "JIRA_PERSONAL_ACCESS_TOKEN": "email@example.com:your_personal_jira_access_token",
+        "JIRA_BASE_URL": "jira_base_url"
+      }
+    }
+  }
+}
+```
+
 ## Components
 
 ### Tools
