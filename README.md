@@ -131,3 +131,22 @@ pnpm build
 ```shell
 pnpm inspector
 ```
+
+## TODOS
+
+- [x] list_projects
+- [x] list_boards
+- [x] list_sprints_from_board
+- [x] list_issues_from_sprint
+- [ ] get_issue_by_id_or_key
+- [ ] create_issue
+- [ ] update_issue
+- [ ] delete_an_issue
+- [ ] archieve_an_issue
+- [ ] list_comments_from_issue
+- [ ] get_comment_from_issue_by_id
+- [ ] create_comment_in_issue
+- [ ] update_comment_of_issue
+- [ ] delete_comment_of_issue
+- [ ] list_subtasks_from_issue
+- [ ] get_user_by_username_or_key
