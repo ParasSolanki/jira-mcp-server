@@ -1,5 +1,7 @@
 # Jira MCP Server
 
+![NPM Version](https://img.shields.io/npm/v/%40parassolanki%2Fjira-mcp-server)
+
 A [Model Context Protocol](https://github.com/modelcontextprotocol) Server for Jira.
 
 Provides integration with Jira through MCP, allowing LLMs to interact with it.
@@ -9,6 +11,8 @@ Provides integration with Jira through MCP, allowing LLMs to interact with it.
 ## Installation
 
 ### Manual Installation
+
+> Note: Requires Node version to be 22.12.0 or above
 
 1. Create or get Jira Personal Access Token: [Guide](https://confluence.atlassian.com/enterprise/using-personal-access-tokens-1026032365.html)
 
@@ -22,7 +26,7 @@ Provides integration with Jira through MCP, allowing LLMs to interact with it.
   "mcpServers": {
     "jira": {
       "command": "npx",
-      "args": ["-y", "jira-mcp-server"],
+      "args": ["-y", "@parassolanki/jira-mcp-server@latest"],
       "env": {
         "JIRA_PERSONAL_ACCESS_TOKEN": "email@example.com:your_personal_jira_access_token",
         "JIRA_BASE_URL": "jira_base_url"
