@@ -1,5 +1,11 @@
 # @parassolanki/jira-mcp-server
 
+## 0.0.5
+
+### Patch Changes
+
+- [#10](https://github.com/ParasSolanki/jira-mcp-server/pull/10) [`cfb543d`](https://github.com/ParasSolanki/jira-mcp-server/commit/cfb543d1545330b5d71ba6f486e22a0e084121f8) Thanks [@ParasSolanki](https://github.com/ParasSolanki)! - fix list issues from sprint sending long json response causing long thread issues on cursor
+
 ## 0.0.4
 
 ### Patch Changes
