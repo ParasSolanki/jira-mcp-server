@@ -1,5 +1,11 @@
 # @parassolanki/jira-mcp-server
 
+## 0.0.6
+
+### Patch Changes
+
+- [#12](https://github.com/ParasSolanki/jira-mcp-server/pull/12) [`f1b9680`](https://github.com/ParasSolanki/jira-mcp-server/commit/f1b9680e5444efedddba508111052f6cb598eeba) Thanks [@ParasSolanki](https://github.com/ParasSolanki)! - fix schema validation bug on issues schema and update expand option values of list issues from sprint tool
+
 ## 0.0.5
 
 ### Patch Changes
