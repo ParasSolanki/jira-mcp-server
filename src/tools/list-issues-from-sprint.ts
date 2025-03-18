@@ -4,8 +4,17 @@ import { err, ok } from "neverthrow";
 import { zodToJsonSchema } from "zod-to-json-schema";
 import type { Tool } from "@modelcontextprotocol/sdk/types.js";
 import { env } from "../env.ts";
+import { issueSchema } from "../common/schema.ts";
 
 // @see https://developer.atlassian.com/server/jira/platform/rest/v10004/api-group-board/#api-agile-1-0-board-boardid-sprint-sprintid-issue-get
+
+const listIssuesFromSprintSchema = z.object({
+  maxResults: z.number().optional(),
+  startAt: z.number().optional(),
+  expand: z.string().optional(),
+  total: z.number().optional(),
+  issues: z.array(issueSchema),
+});
 
 export const listIssuesFromSprintInputSchema = z.object({
   sprintId: z.string().describe("The ID of the sprint"),
@@ -13,7 +22,9 @@ export const listIssuesFromSprintInputSchema = z.object({
   maxResults: z
     .number()
     .optional()
-    .describe("The maximum number of results to return, (max: 100)"),
+    .describe(
+      "The maximum number of results to return, (default: 5, max: 100)",
+    ),
   startAt: z
     .number()
     .optional()
@@ -53,5 +64,11 @@ export async function listIssuesFromSprint(input: ListIssuesFromSprintInput) {
 
   if (json.isErr()) return err(json.error);
 
-  return ok(json.value);
+  const result = listIssuesFromSprintSchema.safeParse(json.value);
+
+  if (!result.success) {
+    return err(new Error("Invalid response from Jira"));
+  }
+
+  return ok(result.data);
 }
