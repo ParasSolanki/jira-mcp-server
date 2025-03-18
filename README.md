@@ -1,6 +1,6 @@
 # Jira MCP Server
 
-![NPM Version](https://img.shields.io/npm/v/%40parassolanki%2Fjira-mcp-server)
+![NPM Version](https://img.shields.io/npm/v/%40parassolanki%2Fjira-mcp-server) ![NPM Downloads](https://img.shields.io/npm/dw/%40parassolanki%2Fjira-mcp-server) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 A [Model Context Protocol](https://github.com/modelcontextprotocol) Server for Jira.
 
