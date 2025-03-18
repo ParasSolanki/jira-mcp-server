@@ -33,7 +33,7 @@ export const listIssuesFromSprintInputSchema = z.object({
     .string()
     .optional()
     .describe(
-      "Use this parameter to include additional information in the response. This parameter accepts a comma-separated list. Expand options include: `operations`,`versionedRepresentations`,`editmeta`,`changelog` and `renderedFields`. Comma separated list of options.",
+      "Use this parameter to include additional information in the response. This parameter accepts a comma-separated list. Expand options include: `schema` and `names`. Comma separated list of options.",
     ),
 });
 

@@ -19,11 +19,11 @@ export const issueSchema = z.object({
       .optional(),
     sprint: z
       .object({
-        id: z.string(),
+        id: z.number(),
         self: z.string(),
         name: z.string(),
         description: z.string().nullable().optional(),
-        originBoardId: z.string().nullable().optional(),
+        originBoardId: z.number().nullable().optional(),
         state: z.string().nullable().optional(),
       })
       .nullable()
@@ -43,7 +43,6 @@ export const issueSchema = z.object({
       .object({
         id: z.string(),
         self: z.string(),
-        name: z.string(),
         key: z.string(),
         description: z.string().nullable().optional(),
         originBoardId: z.string().nullable().optional(),

@@ -87,7 +87,7 @@ For Windows:
       - `sprintId` (string): The ID of the sprint.
       - `maxResults` (optional number, max: 100): The maximum number of results to return.
       - `startAt` (optional number): The starting index of the returned boards.
-      - `expand` (optional string): Expand additional information in the response. (comma separated `operations`, `versionedRepresentations`, `editmeta`, `changelog` and `renderedFields`).
+      - `expand` (optional string): Expand additional information in the response. (comma separated `schema` and `names`).
 
 ## Usage examples
 
