@@ -6,15 +6,15 @@
   "type": "module",
   "homepage": "https://github.com/ParasSolanki/jira-mcp-server#readme",
   "author": "Paras Solanki <parassolanki151@gmail.com> (https://github.com/ParasSolanki)",
+  "bin": "dist/app.js",
+  "main": "dist/app.js",
+  "packageManager": "pnpm@9.15.3",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ParasSolanki/jira-mcp-server.git"
   },
   "bugs": {
     "url": "https://github.com/ParasSolanki/jira-mcp-server/issues"
-  },
-  "bin": {
-    "jira-mcp-server": "dist/app.js"
   },
   "keywords": [
     "jira",
@@ -30,13 +30,11 @@
     "README.md",
     "LICENSE"
   ],
-  "main": "dist/app.js",
-  "packageManager": "pnpm@9.15.3",
   "scripts": {
     "dev": "dotenvx run -- tsx watch src/app.ts",
-    "build": "rolldown -c rolldown.config.ts",
+    "build": "rolldown -c rolldown.config.ts && shx chmod +x dist/*.js",
     "build:local": "dotenvx run -f .env.production -- pnpm build",
-    "inspector:local": "pnpm build:local && npx @modelcontextprotocol/inspector dist/app.js",
+    "inspector": "pnpm build && npx @modelcontextprotocol/inspector dist/app.js",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "format": "prettier '**/*.{cjs,mjs,ts,tsx,md,json}' --ignore-path ./.gitignore --ignore-unknown --write",
@@ -45,7 +43,7 @@
     "pub:release": "pnpm build && changeset publish"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.6.1",
+    "@modelcontextprotocol/sdk": "^1.7.0",
     "@t3-oss/env-core": "^0.12.0",
     "neverthrow": "^8.2.0",
     "universal-user-agent": "^7.0.2",
@@ -60,8 +58,9 @@
     "@types/node": "^22.13.8",
     "eslint-plugin-neverthrow": "^1.1.4",
     "prettier": "^3.5.3",
-    "rolldown": "1.0.0-beta.3",
+    "rolldown": "1.0.0-beta.4",
     "rollup-plugin-swc3": "^0.12.1",
+    "shx": "^0.3.4",
     "tsx": "^4.19.3",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.25.0"
