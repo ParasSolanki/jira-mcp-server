@@ -25,6 +25,11 @@ import {
   listSprintsFromBoard,
   listSprintsFromBoardInputSchema,
 } from "./tools/list-sprints-from-board.js";
+import {
+  CREATE_ISSUE_TOOL,
+  createIssue,
+  createIssueInputSchema,
+} from "./tools/create-issue.js";
 
 const server = new Server(
   { name: "Jira MCP Server", version: VERSION },
@@ -37,6 +42,9 @@ export const tools = [
   LIST_BOARDS_TOOL,
   LIST_SPRINTS_FROM_BOARD_TOOL,
   LIST_ISSUES_FROM_SPRINT_TOOL,
+
+  // create
+  CREATE_ISSUE_TOOL,
 ] satisfies Tool[];
 
 server.setRequestHandler(ListToolsRequestSchema, async () => {
@@ -142,6 +150,33 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       }
 
       const result = await listSprintsFromBoard(input.data);
+
+      if (result.isErr()) {
+        console.error(result.error.message);
+        return {
+          isError: true,
+          content: [{ type: "text", text: "An error occurred" }],
+        };
+      }
+
+      return {
+        content: [
+          { type: "text", text: JSON.stringify(result.value, null, 2) },
+        ],
+      };
+    }
+
+    if (name === CREATE_ISSUE_TOOL.name) {
+      const input = createIssueInputSchema.safeParse(args);
+
+      if (!input.success) {
+        return {
+          isError: true,
+          content: [{ type: "text", text: "Invalid input" }],
+        };
+      }
+
+      const result = await createIssue(input.data);
 
       if (result.isErr()) {
         console.error(result.error.message);
