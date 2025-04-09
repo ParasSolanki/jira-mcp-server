@@ -139,7 +139,8 @@ pnpm inspector
 - [x] list_sprints_from_board
 - [x] list_issues_from_sprint
 - [ ] get_issue_by_id_or_key
-- [ ] create_issue
+- [x] create_issue (task issue type only)
+- [ ] create_issue (story, epic, sub-task issue types)
 - [ ] update_issue
 - [ ] delete_an_issue
 - [ ] archieve_an_issue
