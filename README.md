@@ -89,6 +89,13 @@ For Windows:
       - `startAt` (optional number): The starting index of the returned boards.
       - `expand` (optional string): Expand additional information in the response. (comma separated `schema` and `names`).
 
+5.  `create_issue`: Create an issue in Jira (Only supports Task issue type).
+
+    - Required inputs:
+      - `projectKeyOrId` (string): Key or Id of the project.
+      - `summary` (string): The summary/title of the issue.
+      - `description` (string): The description of the issue.
+
 ## Usage examples
 
 Some example prompts you can use to interact with Jira:
