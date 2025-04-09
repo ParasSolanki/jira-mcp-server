@@ -25,6 +25,11 @@ import {
   listSprintsFromBoard,
   listSprintsFromBoardInputSchema,
 } from "./tools/list-sprints-from-board.js";
+import {
+  GET_ISSUE_BY_ID_OR_KEY_TOOL,
+  getIssueByIdOrKey,
+  getIssueByIdOrKeyInputSchema,
+} from "./tools/get-issue-by-id-or-key.js";
 
 const server = new Server(
   { name: "Jira MCP Server", version: VERSION },
@@ -37,6 +42,7 @@ export const tools = [
   LIST_BOARDS_TOOL,
   LIST_SPRINTS_FROM_BOARD_TOOL,
   LIST_ISSUES_FROM_SPRINT_TOOL,
+  GET_ISSUE_BY_ID_OR_KEY_TOOL,
 ] satisfies Tool[];
 
 server.setRequestHandler(ListToolsRequestSchema, async () => {
@@ -142,6 +148,33 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       }
 
       const result = await listSprintsFromBoard(input.data);
+
+      if (result.isErr()) {
+        console.error(result.error.message);
+        return {
+          isError: true,
+          content: [{ type: "text", text: "An error occurred" }],
+        };
+      }
+
+      return {
+        content: [
+          { type: "text", text: JSON.stringify(result.value, null, 2) },
+        ],
+      };
+    }
+
+    if (name === GET_ISSUE_BY_ID_OR_KEY_TOOL.name) {
+      const input = getIssueByIdOrKeyInputSchema.safeParse(args);
+
+      if (!input.success) {
+        return {
+          isError: true,
+          content: [{ type: "text", text: "Invalid input" }],
+        };
+      }
+
+      const result = await getIssueByIdOrKey(input.data);
 
       if (result.isErr()) {
         console.error(result.error.message);
