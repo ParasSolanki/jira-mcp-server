@@ -1,6 +1,6 @@
 {
   "name": "@parassolanki/jira-mcp-server",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "A model context protocol server for Jira API.",
   "license": "MIT",
   "type": "module",

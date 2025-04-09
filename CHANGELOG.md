@@ -1,5 +1,11 @@
 # @parassolanki/jira-mcp-server
 
+## 0.1.0
+
+### Minor Changes
+
+- [#15](https://github.com/ParasSolanki/jira-mcp-server/pull/15) [`20e3840`](https://github.com/ParasSolanki/jira-mcp-server/commit/20e38406d6746b69a0b4a14104f5ce3e09ed089b) Thanks [@ParasSolanki](https://github.com/ParasSolanki)! - Create issue tool
+
 ## 0.0.6
 
 ### Patch Changes
